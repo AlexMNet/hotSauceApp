@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <% for(let sauce of sauces){ %>
+
+    <div class="col mb-3">
+      <div class="card mx-auto" style="width: 18rem">
+        <img
+          src="<%= sauce.imageUrl %>"
+          class="card-img-top img-fluid"
+          alt="..."
+          style="max-height: 200px; width: auto; object-fit: contain"
+        />
+        <div class="card-body">
+          <h5 class="card-title text-center"><%= sauce.name %></h5>
+          <p class="card-text"><%= sauce.description.substring(0, 150) %>...</p>
+          <p>
+            <strong>Ingredients:</strong>
+            <%= sauce.ingredients.substring(0, 100) %>...
+          </p>
+          <p>Price: $<%= sauce.price %></p>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
