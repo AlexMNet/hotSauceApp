@@ -1,0 +1,55 @@
+<% layout('layouts/boilerplate') %> <% layout('layouts/boilerplate') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col mb-3">
+      <div class="card mb-3 mx-auto" style="max-width: 700px">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="<%= sauce.imageUrl %>" alt="..." class="img-fluid" />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= sauce.name %></h5>
+              <p class="starability-result" data-rating="<%= sauce.rating %>">
+                Rated: <%= sauce.rating %> stars
+              </p>
+
+              <p class="text-muted">Bottles: <%= sauce.bottles %></p>
+              <p class="text-muted">Heat: <%= sauce.heat %></p>
+              <p class="text-muted">Price: $<%= sauce.price %></p>
+              <p class="card-text"><%= sauce.description %></p>
+              <p class="card-text">
+                <strong>Ingredients:</strong> <%= sauce.ingredients %>
+              </p>
+              <p class="card-text"><strong>Size:</strong> <%= sauce.size %></p>
+
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="card mx-auto" style="max-width: 500px">
+        <img
+          src="<%= sauce.imageUrl %>"
+          class="card-img-top img-fluid"
+          alt="..."
+          style="max-height: 200px; width: auto; object-fit: contain"
+        />
+        <div class="card-body">
+          <a href="/sauces/<%= sauce._id %>"
+            ><h5 class="card-title text-center mb-3"><%= sauce.name %></h5></a
+          >
+
+          <p class="card-text"><%= sauce.description %></p>
+          <p>Rating:</p>
+          <p class="starability-result" data-rating="<%= sauce.rating %>">
+            Rated: <%= sauce.rating %> stars
+          </p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

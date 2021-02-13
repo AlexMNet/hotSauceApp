@@ -20,7 +20,7 @@ app.use(methodOverride('_method'));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.set('partials', path.join(__dirname, 'partials'));
+// app.set('partials', path.join(__dirname, 'partials'));
 
 //==========================================================
 //DATABASE
@@ -30,6 +30,7 @@ mongoose
   .connect('mongodb://localhost:27017/hotSauceCollection', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log('MONGO CONNECTION OPEN!!!');
@@ -44,17 +45,83 @@ mongoose
 //==========================================================
 
 app.get('/sauces', async (req, res) => {
-  const sauces = await Sauce.find({});
-  res.render('sauces/home', { sauces });
+  const sauces = await Sauce.find({ isEmpty: false });
+  let numOfBottles = 0;
+  sauces.forEach((sauce) => {
+    numOfBottles += sauce.bottles;
+  });
+  console.log(numOfBottles);
+  res.render('sauces/home', { sauces, numOfBottles });
+});
+
+app.get('/sauces/resupply', async (req, res) => {
+  const sauces = await Sauce.find({ isEmpty: true });
+  console.log(sauces);
+  res.render('sauces/resupply', { sauces });
 });
 
 app.get('/sauces/new', (req, res) => {
   res.render('sauces/new');
 });
 
-app.post('/sauces', (req, res) => {
-  const { name, myfile } = req.body;
-  sauces.push({ name, myfile });
+app.post('/sauces', async (req, res) => {
+  const sauce = new Sauce(req.body);
+  await sauce.save();
+  console.log(req.body);
+  res.redirect('/sauces');
+});
+
+app.get('/sauces/:id', async (req, res) => {
+  const { id } = req.params;
+  const sauce = await Sauce.findById(id);
+  console.log(sauce);
+  res.render('sauces/show', { sauce });
+});
+
+app.get('/sauces/:id/edit', async (req, res) => {
+  const { id } = req.params;
+  const sauce = await Sauce.findById(id);
+  res.render('sauces/edit', { sauce });
+});
+
+app.get('/sauces/:id/resupply', async (req, res) => {
+  const { id } = req.params;
+  const sauce = await Sauce.findByIdAndUpdate(
+    id,
+    { $set: { isEmpty: true } },
+    { new: true }
+  );
+  await sauce.save();
+  res.redirect('/sauces/resupply');
+});
+
+app.get('/sauces/:id/toCollection', async (req, res) => {
+  const { id } = req.params;
+  const sauce = await Sauce.findByIdAndUpdate(
+    id,
+    { $set: { isEmpty: false } },
+    { new: true }
+  );
+  await sauce.save();
+  res.redirect('/sauces');
+});
+
+app.put('/sauces/:id', async (req, res) => {
+  const { id } = req.params;
+  const sauce = await Sauce.findByIdAndUpdate(
+    id,
+    {
+      ...req.body,
+    },
+    { new: true }
+  );
+  await sauce.save();
+  res.redirect(`/sauces/${id}`);
+});
+
+app.delete('/sauces/:id', async (req, res) => {
+  const { id } = req.params;
+  const deletedSauce = await Sauce.findByIdAndDelete(id);
   res.redirect('/sauces');
 });
 

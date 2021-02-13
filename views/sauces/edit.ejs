@@ -4,7 +4,11 @@
     <h1 class="text-center display-3">Enter New Hot Sauce!</h1>
 
     <div class="col-lg-6 offset-lg-3">
-      <form action="/sauces" method="POST" class="mb-5">
+      <form
+        action="/sauces/<%= sauce._id %>?_method=PUT"
+        method="POST"
+        class="mb-5"
+      >
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
           <input
@@ -12,8 +16,9 @@
             class="form-control"
             id="name"
             name="name"
-            aria-describedby="emailHelp"
+            aria-describedby=""
             placeholder="Enter Sauce Name"
+            value="<%= sauce.name %>"
           />
         </div>
         <div class="mb-3">
@@ -23,19 +28,9 @@
             class="form-control"
             id="brand"
             name="brand"
-            aria-describedby="emailHelp"
+            aria-describedby=""
             placeholder="Enter Sauce Brand"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="brand" class="form-label">Bottles:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="bottles"
-            name="bottles"
-            aria-describedby="emailHelp"
-            placeholder="Enter number of bottles"
+            value="<%= sauce.brand %>"
           />
         </div>
         <div class="mb-3">
@@ -45,54 +40,35 @@
             class="form-control"
             id="price"
             name="price"
-            aria-describedby="emailHelp"
+            aria-describedby=""
             placeholder="Enter Price"
+            value="<%= sauce.price %>"
           />
         </div>
-        <!-- <div class="mb-3">
+        <div class="mb-3">
           <label for="rating" class="form-label">Rating:</label>
           <input
             type="number"
             class="form-control"
             id="rating"
             name="rating"
-            aria-describedby="emailHelp"
+            aria-describedby=""
             placeholder="Enter Rating (1-5)"
+            value="<%= sauce.rating %>"
           />
-        </div> -->
+        </div>
         <div class="mb-3">
-          <label for="heat" class="form-label">Heat:</label>
+          <label for="rating" class="form-label">Heat:</label>
           <input
             type="string"
             class="form-control"
             id="heat"
             name="heat"
             aria-describedby=""
-            placeholder="Mild, Medium, Hot, Extra Hot!"
+            placeholder="Enter Heat Level (1-10)"
+            value="<%= sauce.heat %>"
           />
         </div>
-        <fieldset class="starability-basic mb-3">
-          <legend>Rating:</legend>
-          <input
-            type="radio"
-            id="no-rate"
-            class="input-no-rate"
-            name="rating"
-            value="0"
-            checked
-            aria-label="No rating."
-          />
-          <input type="radio" id="first-rate1" name="rating" value="1" />
-          <label for="first-rate1" title="Terrible">1 star</label>
-          <input type="radio" id="first-rate2" name="rating" value="2" />
-          <label for="first-rate2" title="Not good">2 stars</label>
-          <input type="radio" id="first-rate3" name="rating" value="3" />
-          <label for="first-rate3" title="Average">3 stars</label>
-          <input type="radio" id="first-rate4" name="rating" value="4" />
-          <label for="first-rate4" title="Very good">4 stars</label>
-          <input type="radio" id="first-rate5" name="rating" value="5" />
-          <label for="first-rate5" title="Amazing">5 stars</label>
-        </fieldset>
 
         <div class="mb-3">
           <label for="size" class="form-label">Size:</label>
@@ -101,26 +77,23 @@
             class="form-control"
             id="size"
             name="size"
-            aria-describedby="emailHelp"
+            aria-describedby=""
             placeholder="Enter size in oz"
+            value="<%= sauce.size %>"
           />
         </div>
 
         <div class="mb-3">
           <label for="description" class="form-label">Description:</label>
-          <textarea
-            class="form-control"
-            name="description"
-            id="description"
-          ></textarea>
+          <textarea class="form-control" name="description" id="description">
+<%= sauce.description %>"</textarea
+          >
         </div>
         <div class="mb-3">
           <label for="ingredients" class="form-label">Ingredients:</label>
-          <textarea
-            class="form-control"
-            name="ingredients"
-            id="ingredients"
-          ></textarea>
+          <textarea class="form-control" name="ingredients" id="ingredients">
+<%= sauce.ingredients %>"</textarea
+          >
         </div>
 
         <div class="mb-3">
@@ -131,6 +104,7 @@
             id="imageUrl"
             name="imageUrl"
             multiple
+            value="<%= sauce.imageUrl %>"
           />
         </div>
         <div class="d-grid d-lg-inline">

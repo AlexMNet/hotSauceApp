@@ -1,11 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="container">
-  <h1 class="display-2 text-center">Alex's Hot Sauce Collection</h1>
-  <p class="text-center text-muted">
-    You currently own <span class="lead"><%= numOfBottles %> </span>bottles of
-    hot sauce!
-  </p>
+  <h1 class="display-2 text-center">Alex's Empty Bottles</h1>
   <hr />
   <div class="row">
     <% for(let sauce of sauces){ %>
@@ -39,8 +35,8 @@
             ></a>
             <a
               class="btn btn-outline-info btn-sm"
-              href="/sauces/<%= sauce._id %>/resupply"
-              >Empty?</a
+              href="/sauces/<%= sauce._id %>/toCollection"
+              >Add to Collection</a
             >
           </div>
           <form
