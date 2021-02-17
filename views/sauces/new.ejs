@@ -4,7 +4,12 @@
     <h1 class="text-center display-3">Enter New Hot Sauce!</h1>
 
     <div class="col-lg-6 offset-lg-3">
-      <form action="/sauces" method="POST" class="mb-5">
+      <form
+        action="/sauces"
+        method="POST"
+        class="mb-5"
+        enctype="multipart/form-data"
+      >
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
           <input
@@ -123,7 +128,7 @@
           ></textarea>
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="imageUrl" class="form-label">Image:</label>
           <input
             type="text"
@@ -132,6 +137,11 @@
             name="imageUrl"
             multiple
           />
+        </div> -->
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Image:</label>
+          <input type="file" class="form-control" id="image" name="image" />
         </div>
         <div class="d-grid d-lg-inline">
           <button type="submit" class="btn btn-primary">Submit</button>

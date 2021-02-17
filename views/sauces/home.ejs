@@ -8,12 +8,12 @@
   </p>
   <hr />
   <div class="row">
-    <% for(let sauce of sauces){ %>
+    <% for(let sauce of sauces.docs){ %>
 
     <div class="col mb-3">
       <div class="card mx-auto" style="width: 18rem">
         <img
-          src="<%= sauce.imageUrl %>"
+          src="<%= sauce.image.url %>"
           class="card-img-top img-fluid"
           alt="..."
           style="max-height: 200px; width: auto; object-fit: contain"
@@ -56,5 +56,26 @@
       </div>
     </div>
     <% } %>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination pagination-sm flex-wrap justify-content-center">
+        <% if(sauces.page - 1){ %>
+        <li class="page-item">
+          <a class="page-link" href="/sauces?page=<%= sauces.page - 1 %>"
+            >Previous</a
+          >
+        </li>
+        <% } %> <% for(let i = 1; i <= sauces.totalPages; i++){ %>
+        <li class="page-item">
+          <a class="page-link" href="/sauces?page=<%= i %>"> <%= i %> </a>
+        </li>
+        <% } %> <% if((sauces.page + 1) <= sauces.totalPages){ %>
+        <li class="page-item">
+          <a class="page-link" href="/sauces?page=<%= sauces.page + 1 %>"
+            >Next</a
+          >
+        </li>
+        <% } %>
+      </ul>
+    </nav>
   </div>
 </div>

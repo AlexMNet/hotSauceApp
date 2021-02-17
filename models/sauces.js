@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const sauceSchema = new mongoose.Schema({
   name: String,
@@ -14,7 +15,12 @@ const sauceSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  imageUrl: String,
+  image: {
+    url: String,
+    filename: String,
+  },
 });
+
+sauceSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Sauce', sauceSchema);

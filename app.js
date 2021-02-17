@@ -2,6 +2,10 @@
 //CONFIG
 //==========================================================
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -10,6 +14,9 @@ const ejsMate = require('ejs-mate');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Sauce = require('./models/sauces');
+const { storage } = require('./cloudinary');
+const multer = require('multer');
+const upload = multer({ storage });
 const port = process.env.PORT || 3000;
 
 app.engine('ejs', ejsMate);
@@ -45,12 +52,21 @@ mongoose
 //==========================================================
 
 app.get('/sauces', async (req, res) => {
-  const sauces = await Sauce.find({ isEmpty: false });
+  const bottleCount = await Sauce.find({ isEmpty: false });
   let numOfBottles = 0;
-  sauces.forEach((sauce) => {
-    numOfBottles += sauce.bottles;
+
+  bottleCount.forEach((bottle) => {
+    numOfBottles += bottle.bottles;
   });
-  console.log(numOfBottles);
+
+  const sauces = await Sauce.paginate(
+    { isEmpty: false },
+    {
+      page: req.query.page || 1,
+      limit: 8,
+    }
+  );
+
   res.render('sauces/home', { sauces, numOfBottles });
 });
 
@@ -64,10 +80,10 @@ app.get('/sauces/new', (req, res) => {
   res.render('sauces/new');
 });
 
-app.post('/sauces', async (req, res) => {
+app.post('/sauces', upload.single('image'), async (req, res) => {
   const sauce = new Sauce(req.body);
+  sauce.image = { url: req.file.path, filename: req.file.filename };
   await sauce.save();
-  console.log(req.body);
   res.redirect('/sauces');
 });
 
