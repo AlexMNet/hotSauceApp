@@ -7,8 +7,9 @@
       <form
         action="/sauces"
         method="POST"
-        class="mb-5"
+        class="mb-5 validated-form"
         enctype="multipart/form-data"
+        novalidate
       >
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
@@ -19,7 +20,10 @@
             name="name"
             aria-describedby="emailHelp"
             placeholder="Enter Sauce Name"
+            required
           />
+          <div class="invalid-feedback">Please add a name</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
           <label for="brand" class="form-label">Brand:</label>
@@ -30,7 +34,10 @@
             name="brand"
             aria-describedby="emailHelp"
             placeholder="Enter Sauce Brand"
+            required
           />
+          <div class="invalid-feedback">Please add a brand</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
           <label for="brand" class="form-label">Bottles:</label>
@@ -41,7 +48,12 @@
             name="bottles"
             aria-describedby="emailHelp"
             placeholder="Enter number of bottles"
+            required
           />
+          <div class="invalid-feedback">
+            Please add the number of bottles you have
+          </div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
           <label for="price" class="form-label">Price:</label>
@@ -52,7 +64,10 @@
             name="price"
             aria-describedby="emailHelp"
             placeholder="Enter Price"
+            required
           />
+          <div class="invalid-feedback">Please add a price</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
         <!-- <div class="mb-3">
           <label for="rating" class="form-label">Rating:</label>
@@ -74,9 +89,12 @@
             name="heat"
             aria-describedby=""
             placeholder="Mild, Medium, Hot, Extra Hot!"
+            required
           />
+          <div class="invalid-feedback">Please add a heat level</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
-        <fieldset class="starability-basic mb-3">
+        <fieldset class="starability-basic mb-3" required>
           <legend>Rating:</legend>
           <input
             type="radio"
@@ -108,7 +126,10 @@
             name="size"
             aria-describedby="emailHelp"
             placeholder="Enter size in oz"
+            required
           />
+          <div class="invalid-feedback">Please add a size</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
 
         <div class="mb-3">
@@ -117,7 +138,10 @@
             class="form-control"
             name="description"
             id="description"
+            required
           ></textarea>
+          <div class="invalid-feedback">Please add a description</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
           <label for="ingredients" class="form-label">Ingredients:</label>
@@ -125,7 +149,10 @@
             class="form-control"
             name="ingredients"
             id="ingredients"
+            required
           ></textarea>
+          <div class="invalid-feedback">Please add ingredients</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
 
         <!-- <div class="mb-3">
@@ -141,7 +168,15 @@
 
         <div class="mb-3">
           <label for="image" class="form-label">Image:</label>
-          <input type="file" class="form-control" id="image" name="image" />
+          <input
+            type="file"
+            class="form-control"
+            id="image"
+            name="image"
+            required
+          />
+          <div class="invalid-feedback">Please add an image</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="d-grid d-lg-inline">
           <button type="submit" class="btn btn-primary">Submit</button>
