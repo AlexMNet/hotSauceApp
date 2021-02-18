@@ -19,7 +19,6 @@ const Sauce = require('./models/sauces');
 const { storage } = require('./cloudinary');
 const multer = require('multer');
 const upload = multer({ storage });
-const port = process.env.PORT || 3000;
 
 app.engine('ejs', ejsMate);
 app.use(express.json());
@@ -184,6 +183,11 @@ app.use((err, req, res, next) => {
   const { message = 'something went wrong...', statusCode = 500 } = err;
   res.status(statusCode).send(message);
 });
+
+let por = process.env.PORT;
+if (port == null || port == '') {
+  port = 3000;
+}
 
 app.listen(port, () => {
   console.log(`App is listening on port: ${port}`);
