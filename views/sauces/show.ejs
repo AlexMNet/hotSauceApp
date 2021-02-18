@@ -3,18 +3,25 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col mb-3">
+      <div
+        class="d-grid gap-2 d-md-flex justify-content-md-end mx-auto"
+        style="max-width: 700px"
+      >
+        <a href="/sauces" class="btn btn-outline-primary mb-3"
+          >Back To Collection</a
+        >
+      </div>
       <div class="card mb-3 mx-auto" style="max-width: 700px">
         <div class="row g-0">
           <div class="col-md-4">
             <img src="<%= sauce.image.url %>" alt="..." class="img-fluid" />
           </div>
           <div class="col-md-8">
-            <div class="card-body">
+            <div class="card-body show-card">
               <h5 class="card-title"><%= sauce.name %></h5>
               <p class="starability-result" data-rating="<%= sauce.rating %>">
                 Rated: <%= sauce.rating %> stars
               </p>
-
               <p class="text-muted">Bottles: <%= sauce.bottles %></p>
               <p class="text-muted">Heat: <%= sauce.heat %></p>
               <p class="text-muted">Price: $<%= sauce.price %></p>

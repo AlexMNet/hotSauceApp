@@ -199,3 +199,8 @@ a {
 .card {
    border: none;
 }
+
+.show-card {
+   background-color: whitesmoke;
+   border-radius: 10px;
+}

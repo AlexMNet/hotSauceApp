@@ -35,14 +35,11 @@ app.set('views', path.join(__dirname, 'views'));
 //==========================================================
 
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASS}@hotsaucecluster.aupxg.mongodb.net/hotSauceCollection`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect('mongodb://localhost:27017/hotSauceCollection', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
   .then(() => {
     console.log('MONGO CONNECTION OPEN!!!');
   })
@@ -50,6 +47,23 @@ mongoose
     console.log('MONGO CONNECTION ERROR!!!!');
     console.log(err);
   });
+
+// mongoose
+//   .connect(
+//     `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASS}@hotsaucecluster.aupxg.mongodb.net/hotSauceCollection`,
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//       useFindAndModify: false,
+//     }
+//   )
+//   .then(() => {
+//     console.log('MONGO CONNECTION OPEN!!!');
+//   })
+//   .catch((err) => {
+//     console.log('MONGO CONNECTION ERROR!!!!');
+//     console.log(err);
+//   });
 
 //==========================================================
 //ROUTES
@@ -97,7 +111,7 @@ app.post(
     const sauce = new Sauce(req.body);
     sauce.image = { url: req.file.path, filename: req.file.filename };
     await sauce.save();
-    res.redirect('/sauces');
+    res.redirect(`/sauces/${sauce._id}`);
   })
 );
 
